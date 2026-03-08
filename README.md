@@ -4,7 +4,7 @@ Let for the example  create two servers 1) Ansible Server 2) Target Server
 Note : We will create every thing in Ansible and based on the Ansible Playbook it will perform task in Target Server 
 Prerequsits: 1) Install Ansible in Ansible server 2) Create Passowrd less Auth using ssh-keygen 
 
-Step 1  - Connect to Ansible server using PrivateIp (Ubuntu) ec2 instance
+Step 1  - Connect to Ansible server using PrivateIp (Ubuntu) ec2 instance.(Only PublicIp is working when connecting)
         - install Ansible - sudo apt update /sudo apt install ansible Note: Running any apt package manager command we need sudo user
         - check Ansible availablity - ansible --version
 Step 2 - Set up Passwordless Authentications (Easiest Way ssh-keygen and other way is ssh-copy-id)
