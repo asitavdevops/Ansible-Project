@@ -30,11 +30,14 @@ Step 4  - Ansible Adhoc command --> Like Shell commands we can use ansible comma
          -a --> stands for Argument
          Note: To check all modules google - Ansible all modules -(ansible.builtin.shell – Execute shell commands on targets)
          (https://docs.ansible.com/projects/ansible/latest/collections/index_module.html)
+         
          Q1) No of processes running in all target servers what is the ansible adhoc command and disk usages .
           - ansible -i inventory all -m "shell" -a "nproc"
           - ansible -i inventory all -m "shell" -a "df"
+          
           Q2) Copy file from Ansible server to Target servers
         - ansible -i ansible all -m "copy" "src: "/srv/myfiles/foo.conf" dest: "/etc/foo.conf" owner: "foo" group: "foo" mode: "'0644'" "
+        
         Q3) Lets say we have DBserver and Webserver in Inventory and we want to execute the adhoc command for differently for DB server
             and webserver. 
             Ans: Server Grouping concept in Inventory files
