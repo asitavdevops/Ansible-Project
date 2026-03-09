@@ -84,7 +84,9 @@ Senario 2: Create 3 Ec2 Instances on AWS (Terraform)
            Configure Other 2 Ec2 Instance as workers (Ansible)
 Note: Above Senario will increase complexcity if written in 1 playbook hence to reduce that we use Ansible Role(Multiple playbook).
 
-Ansible Role: 
+Ansible Role: An Ansible Role is a way to organize Ansible playbooks into reusable and modular components.
+It follows a standard directory structure that separates tasks, variables, files, templates, and handlers.
+Roles help make automation clean, reusable, and scalable, especially when managing large infrastructure
 
 Explain why we need Roles :
 
@@ -92,12 +94,44 @@ When we want to configure Kubernates using ansible we need to write 50 to 60 tas
 secrets need to configure while creatign this K8 cluster for that very own reason if we try to do it with Roles using ansible-galaxy
 we can segrigate each and everything and structure our ansible playbook .
 
-how to define role:  ansible-galaxy role init kubernates
+**create/initiate a role for kubernates**
+how to define role:  ansible-galaxy role init kubernetes
 
 mkdir secod-playbook ; cd secod-playbook
 ansible-galaxy role init kubernates
 ls -lrt kubernates/
 
+**Standard Role Directory Structure**
+roles/
+ └── nginx/
+     ├── tasks/
+     │    └── main.yml
+     ├── handlers/
+     │    └── main.yml
+     ├── templates/
+     ├── files/
+     ├── vars/
+     │    └── main.yml
+     ├── defaults/
+     │    └── main.yml
+     └── meta/
+         └── main.yml
+
+meta/ : Here meta is used to meta data info about the file . We can provide the playbook infor and licencing info . In feature we want to         share the playbook to the Ansible community so it needs the description .
+defaults/ : we can store some variables.
+vars/ : we can store some variables samething like defaults/
+handlers/ : Handlers we use to handle exceptions.
+tasks/ : Ansible files performs actions based on tasks
+files/ : Basically certificates or any files we want pass. loke we want index.html to pass to task 
+templates/ : Use for templating.
+
+#write same Nginx program using ansible role(Ansible-Galaxy)
+
+
+
+
+***Refer for Practice :**
+https://github.com/ansible/ansible-examples
                      
                 
                          
