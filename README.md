@@ -52,7 +52,61 @@ Step 4  - Ansible Adhoc command --> Like Shell commands we can use ansible comma
           -Only Execute the ansible command for Webserves so that it will execute 
           - ansible -i inventory webservers -m "shell" -a "df"
 
-Step 5 - Ansible Playbook :
+Step 5 - Ansible Playbook : When we want to execute mutiple task we use ansible playbook.
+
+        Senario : In all traget servers we want to install Nginx and start Nginx (Write a playbook)
+        --> vim first-ansible.yml
+        ---(three hyphen stands for yaml file)
+        -        name: Install and start Nginx (Name indicates the explanation of the playbook)
+                 hosts: all (It will execute all the servers in your inventory files)
+                 become: root (It will execute the playbook as a root user , we need to decide same user or root user needed)
+
+                 tasks: (When we want to perform multiple action for each item should start with hyphen)
+                  - name: Install Nginx
+                    shell: apt install nginx (OR)
+                    apt: (Its a package manager module that ansible provides)
+                     name: nginx (Here specify which module i want to use)
+                     state: present (It means to Install)
+                  - name: Start Nginx
+                    shell: systemclt start nginx (OR)
+                    service: (Its a service module that ansible provides)
+                     name: nginx (Here specify which module i want to use)
+                     state: started (It means it will start nginx)
+                     (save the file)
+
+Note :tasks consider the first task if multiple tasks accordingly we can specify
+Run Ansible playbook --> ansible-playbook -i inventory first-ansible.yml
+check how ansible executing internally use debug/vervose(v or vv) option --> ansible-playbook -vvv -i inventory first-ansible.yml
+To check Nginx installed in target server--> sudo systemctl status nginx
+
+Senario 2: Create 3 Ec2 Instances on AWS (Terraform)
+           Configure 1 of those Ec2 Instance as Master(Ansible)
+           Configure Other 2 Ec2 Instance as workers (Ansible)
+Note: Above Senario will increase complexcity if written in 1 playbook hence to reduce that we use Ansible Role(Multiple playbook).
+
+Ansible Role: 
+
+Explain why we need Roles :
+
+When we want to configure Kubernates using ansible we need to write 50 to 60 task , lots of variables, parameters,certificates ,
+secrets need to configure while creatign this K8 cluster for that very own reason if we try to do it with Roles using ansible-galaxy
+we can segrigate each and everything and structure our ansible playbook .
+
+how to define role:  ansible-galaxy role init kubernates
+
+mkdir secod-playbook ; cd secod-playbook
+ansible-galaxy role init kubernates
+ls -lrt kubernates/
+
+                     
+                
+                         
+
+                         
+                
+        
+        
+        
            
 
 
